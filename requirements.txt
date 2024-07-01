@@ -1,7 +1,5 @@
-sympy
-tabulate
-matplotlib
-numpy
-pandas
-os
-argparse
+sympy==1.12.1
+tabulate==0.9.0
+matplotlib==3.9.0
+numpy==2.0.0
+pandas==2.2.2
