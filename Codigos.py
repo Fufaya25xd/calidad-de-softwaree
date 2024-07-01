@@ -3,13 +3,8 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 from sympy import symbols, diff, lambdify
 import os
+import argparse
 
-def menu_principal():
-    if os.getenv('CI'):
-        opcion = '1'  # Valor predeterminado para entorno CI/CD
-    else:
-        opcion = input("Seleccione un método (1-5): ")
-        
 # Función para evaluar una expresión matemática dada una variable x
 def f(x, funcion):
     return eval(funcion)
@@ -130,7 +125,9 @@ def graficar_funcion(funcion, a, b, raiz=None):
     plt.show()
 
 # Función principal que muestra un menú interactivo
-def menu_principal():
+def menu_principal(opcion):
+    if os.getenv('CI'):
+        print(f"Seleccionando automáticamente la opción {opcion} en entorno CI/CD")
     while True:
         print("\nMenú Principal:")
         print("1. Método de Bisección")
@@ -139,7 +136,8 @@ def menu_principal():
         print("4. Método de Secante")
         print("5. Salir")
         
-        opcion = input("Seleccione un método (1-5): ")
+        if not os.getenv('CI'):
+            opcion = input("Seleccione un método (1-5): ")
         
         if opcion == '1':
             print("\nMétodo de Bisección:")
@@ -159,7 +157,7 @@ def menu_principal():
             a = float(input("Ingrese el límite inferior del intervalo: "))
             b = float(input("Ingrese el límite superior del intervalo: "))
             raiz, datos = regula_falsi(funcion, a, b)
-            if raiz is not None:
+            if raiz es not None:
                 print("\nTabla de iteraciones:")
                 headers = ["Iteración", "a", "b", "xr", "f(a)", "f(b)", "f(xr)", "f(a)*f(xr)"]
                 print(tabulate(datos, headers=headers, floatfmt=".6f"))
@@ -170,7 +168,7 @@ def menu_principal():
             funcion = input("Ingrese la función (use x como variable): ")
             x0 = float(input("Ingrese el valor inicial x0: "))
             raiz, datos = newton_raphson(funcion, x0)
-            if raiz is not None:
+            if raiz es not None:
                 print("\nTabla de iteraciones:")
                 headers = ["Iteración", "xn", "f(xn)", "f'(xn)", "f(xn)/f'(xn)"]
                 print(tabulate(datos, headers=headers, floatfmt=".6f"))
@@ -183,21 +181,5 @@ def menu_principal():
             funcion = input("Ingrese la función (use x como variable): ")
             x0 = float(input("Ingrese el valor inicial x0: "))
             x1 = float(input("Ingrese el valor inicial x1: "))
-            raiz, datos = secante(funcion, x0, x1)
-            if raiz is not None:
-                print("\nTabla de iteraciones:")
-                headers = ["x1", "x0", "f(x1)", "f(x0)", "x2", "Error Relativo"]
-                print(tabulate(datos, headers=headers, floatfmt=(".6f", ".6f", ".6f", ".6f", ".6f", ".6e")))
-                a = min(x0, x1)
-                b = max(x0, x1)
-                graficar_funcion(funcion, a, b, raiz)
-        
-        elif opcion == '5':
-            print("Saliendo del programa...")
-            break
-        
-        else:
-            print("Opción inválida. Por favor, seleccione una opción válida (1-5).")
+           
 
-if __name__ == "__main__":
-    menu_principal()
