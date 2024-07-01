@@ -2,7 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 from sympy import symbols, diff, lambdify
+import os
 
+def menu_principal():
+    if os.getenv('CI'):
+        opcion = '1'  # Valor predeterminado para entorno CI/CD
+    else:
+        opcion = input("Seleccione un método (1-5): ")
+        
 # Función para evaluar una expresión matemática dada una variable x
 def f(x, funcion):
     return eval(funcion)
