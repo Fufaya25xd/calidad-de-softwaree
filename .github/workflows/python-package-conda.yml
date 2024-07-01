@@ -28,4 +28,4 @@ jobs:
 
     - name: Run Codigos.py
       run: |
-        python calidad-de-softwaree/Codigos.py  # Ajusta la ruta si es necesario
+        python /mnt/data/Codigos.py  # Ajusta la ruta si es necesario
