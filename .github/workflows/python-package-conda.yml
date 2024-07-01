@@ -28,5 +28,5 @@ jobs:
 
     - name: Run Codigos.py
       run: |
-        python Codigos.py --opcion 1 --funcion "e**2 - 4" --a 0 --b 3
+        python Codigos.py --opcion 1 --funcion "x**2 - 4" --a 0 --b 3
 
