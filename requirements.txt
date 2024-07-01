@@ -3,3 +3,5 @@ tabulate
 matplotlib
 numpy
 pandas
+os
+argparse
