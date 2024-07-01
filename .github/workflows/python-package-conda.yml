@@ -24,9 +24,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt || echo "No se encontró requirements.txt, omitiendo instalación de dependencias."
+        pip install -r requirements.txt
 
     - name: Run Codigos.py
       run: |
-        python Codigos.py  # Ajusta la ruta según sea necesario
+        python Codigos.py --opcion 1  # Pasar el argumento adecuado
+
 
