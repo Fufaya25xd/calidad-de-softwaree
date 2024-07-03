@@ -1,0 +1,75 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ejemplos de metodo de biseccion
+Ejemplos de entradas válidas:
+
+Ejemplo 1:
+Función: x**3 - x - 2
+Límite inferior del intervalo (a): 1
+Límite superior del intervalo (b): 2
+Tolerancia: 1e-6
+Número máximo de iteraciones: 100
+
+Ejemplo 2:
+Función: x**2 - 4
+Límite inferior del intervalo (a): 0
+Límite superior del intervalo (b): 3
+Tolerancia: 1e-6
+Número máximo de iteraciones: 100
+
+Ejemplo 3:
+Función: np.sin(x)
+Límite inferior del intervalo (a): 3
+Límite superior del intervalo (b): 4
+Tolerancia: 1e-6
+Número máximo de iteraciones: 100
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ejemplo del metodo regula falsi
+
+Ejemplo de uso:
+Para probar el código, puedes usar los siguientes valores de entrada:
+
+Función: x**3 - x - 2
+Límite inferior del intervalo (a): 1
+Límite superior del intervalo (b): 2
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ejemplo del metodo de newton raphson
+Ejemplo de uso:
+Para probar el código, puedes usar los siguientes valores de entrada:
+
+Función: x**2 - 4
+Valor inicial x0: 2
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ Ejemplos para el metodo de secante
+ Función: x**2 - 2
+ Valor inicial x0: 1
+ Valor inicial x1: 2
+ 
+ Función: np.cos(x) - x
+ Valor inicial x0: 0
+ Valor inicial x1: 1
+ 
+ Función: np.exp(x) - 3*x
+ Valor inicial x0: 0
+ Valor inicial x1: 2
+ 
+ Función: x**3 - x - 1
+ Valor inicial x0: 0
+ Valor inicial x1: 2
+ 
+ Función: np.sin(x) - 0.5
+ Valor inicial x0: 0
+ Valor inicial x1: 1
+ 
+python Codigos.py --opcion 4 --funcion "x**2 - 2" --x0 1 --x1 2
+python Codigos.py --opcion 4 --funcion "np.cos(x) - x" --x0 0 --x1 1
+python Codigos.py --opcion 4 --funcion "np.exp(x) - 3*x" --x0 0 --x1 2
+python Codigos.py --opcion 4 --funcion "x**3 - x - 1" --x0 1 --x1 2
+python Codigos.py --opcion 4 --funcion "np.sin(x) - 0.5" --x0 0 --x1 1
