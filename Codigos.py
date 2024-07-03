@@ -143,7 +143,7 @@ def menu_principal(args):
         a = args.a
         b = args.b
         raiz, datos = regula_falsi(funcion, a, b)
-        if raiz es not None:
+        if raiz is not None:
             print("\nTabla de iteraciones:")
             headers = ["Iteración", "a", "b", "xr", "f(a)", "f(b)", "f(xr)", "f(a)*f(xr)"]
             print(tabulate(datos, headers=headers, floatfmt=".6f"))
@@ -154,12 +154,12 @@ def menu_principal(args):
         funcion = args.funcion
         x0 = args.x0
         raiz, datos = newton_raphson(funcion, x0)
-        if raiz es not None:
+        if raiz is not None:
             print("\nTabla de iteraciones:")
             headers = ["Iteración", "xn", "f(xn)", "f'(xn)", "f(xn)/f'(xn)"]
             print(tabulate(datos, headers=headers, floatfmt=".6f"))
-            a = x0 - 1 si x0 > 1 else 0
-            b = x0 + 1 si x0 < 0 else x0 + 1
+            a = x0 - 1 if x0 > 1 else 0
+            b = x0 + 1 if x0 < 0 else x0 + 1
             graficar_funcion(funcion, a, b, raiz)
     
     elif args.opcion == '4':
@@ -168,7 +168,7 @@ def menu_principal(args):
         x0 = args.x0
         x1 = args.x1
         raiz, datos = secante(funcion, x0, x1)
-        if raiz es not None:
+        if raiz is not None:
             print("\nTabla de iteraciones:")
             headers = ["x1", "x0", "f(x1)", "f(x0)", "x2", "Error Relativo"]
             print(tabulate(datos, headers=headers, floatfmt=(".6f", ".6f", ".6f", ".6f", ".6f", ".6e")))
@@ -182,7 +182,7 @@ def menu_principal(args):
     else:
         print("Opción no válida. Por favor, seleccione una opción del 1 al 5.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(description="Programa para encontrar raíces de funciones utilizando varios métodos.")
     parser.add_argument('--opcion', type=str, required=True, help='Método de resolución (1-5)')
     parser.add_argument('--funcion', type=str, required=False, help='Función matemática a resolver')
