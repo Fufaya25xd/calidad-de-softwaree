@@ -28,5 +28,5 @@ jobs:
 
     - name: Run Codigos.py
       run: |
-        python Codigos.py --opcion 4 --funcion "np.exp(x) - 3*x" --a 0 --b 2
+        python Codigos.py --opcion 4 --funcion "np.cos(x) - x" --a 0 --b 1
 
