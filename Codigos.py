@@ -192,4 +192,3 @@ if _name_ == "_main_":
     parser.add_argument('--x1', type=float, required=False, help='Valor inicial x1 (para método de Secante)')
     args = parser.parse_args()
     menu_principal(args)
-
