@@ -28,5 +28,5 @@ jobs:
 
     - name: Run Codigos.py
       run: |
-        python Codigos.py --opcion 4 --funcion "np.cos(x) - x" --a 0 --b 1
+        python Codigos.py --opcion 4 --funcion "x**3 - x - 1" --a 0 --b 1
 
