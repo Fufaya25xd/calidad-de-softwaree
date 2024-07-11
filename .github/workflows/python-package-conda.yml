@@ -28,5 +28,5 @@ jobs:
 
     - name: Run Codigos.py
       run: |
-        python Codigos.py --opcion 4 --funcion "np.sin(x) - 0.5" --x0 0 --x1 1 
+        python Codigos.py --opcion 1 --funcion "e**2 - 4" --x0 0 --x1 3 
 
