@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 from sympy import symbols, diff, lambdify
+import argparse
 
 # Función para evaluar una expresión matemática dada una variable x
 def f(x, funcion):
-    return eval(funcion)
+    return eval(funcion, {"np": np, "x": x})
 
 # Método de Bisección
 def biseccion(funcion, a, b, tol=1e-6, max_iter=100):
@@ -123,74 +124,71 @@ def graficar_funcion(funcion, a, b, raiz=None):
     plt.show()
 
 # Función principal que muestra un menú interactivo
-def menu_principal():
-    while True:
-        print("\nMenú Principal:")
-        print("1. Método de Bisección")
-        print("2. Método de Regula Falsi")
-        print("3. Método de Newton-Raphson")
-        print("4. Método de Secante")
-        print("5. Salir")
-        
-        opcion = input("Seleccione un método (1-5): ")
-        
-        if opcion == '1':
-            print("\nMétodo de Bisección:")
-            funcion = input("Ingrese la función (use x como variable): ")
-            a = float(input("Ingrese el límite inferior del intervalo: "))
-            b = float(input("Ingrese el límite superior del intervalo: "))
-            raiz, datos = biseccion(funcion, a, b)
-            if raiz is not None:
-                print("\nTabla de iteraciones:")
-                headers = ["a", "b", "Xr", "f(Xa)", "f(Xr)", "f(a)*f(r)", "Aproximación"]
-                print(tabulate(datos, headers=headers, floatfmt=".6f"))
-                graficar_funcion(funcion, a, b, raiz)
-        
-        elif opcion == '2':
-            print("\nMétodo de Regula Falsi:")
-            funcion = input("Ingrese la función (use x como variable): ")
-            a = float(input("Ingrese el límite inferior del intervalo: "))
-            b = float(input("Ingrese el límite superior del intervalo: "))
-            raiz, datos = regula_falsi(funcion, a, b)
-            if raiz is not None:
-                print("\nTabla de iteraciones:")
-                headers = ["Iteración", "a", "b", "xr", "f(a)", "f(b)", "f(xr)", "f(a)*f(xr)"]
-                print(tabulate(datos, headers=headers, floatfmt=".6f"))
-                graficar_funcion(funcion, a, b, raiz)
-        
-        elif opcion == '3':
-            print("\nMétodo de Newton-Raphson:")
-            funcion = input("Ingrese la función (use x como variable): ")
-            x0 = float(input("Ingrese el valor inicial x0: "))
-            raiz, datos = newton_raphson(funcion, x0)
-            if raiz is not None:
-                print("\nTabla de iteraciones:")
-                headers = ["Iteración", "xn", "f(xn)", "f'(xn)", "f(xn)/f'(xn)"]
-                print(tabulate(datos, headers=headers, floatfmt=".6f"))
-                a = x0 - 1 if x0 > 1 else 0
-                b = x0 + 1 if x0 < 0 else x0 + 1
-                graficar_funcion(funcion, a, b, raiz)
-        
-        elif opcion == '4':
-            print("\nMétodo de Secante:")
-            funcion = input("Ingrese la función (use x como variable): ")
-            x0 = float(input("Ingrese el valor inicial x0: "))
-            x1 = float(input("Ingrese el valor inicial x1: "))
-            raiz, datos = secante(funcion, x0, x1)
-            if raiz is not None:
-                print("\nTabla de iteraciones:")
-                headers = ["x1", "x0", "f(x1)", "f(x0)", "x2", "Error Relativo"]
-                print(tabulate(datos, headers=headers, floatfmt=(".6f", ".6f", ".6f", ".6f", ".6f", ".6e")))
-                a = min(x0, x1)
-                b = max(x0, x1)
-                graficar_funcion(funcion, a, b, raiz)
-        
-        elif opcion == '5':
-            print("Saliendo del programa...")
-            break
-        
-        else:
-            print("Opción inválida. Por favor, seleccione una opción válida (1-5).")
+def menu_principal(args):
+    if args.opcion == '1':
+        print("\nMétodo de Bisección:")
+        funcion = args.funcion
+        a = args.a
+        b = args.b
+        raiz, datos = biseccion(funcion, a, b)
+        if raiz is not None:
+            print("\nTabla de iteraciones:")
+            headers = ["a", "b", "Xr", "f(Xa)", "f(Xr)", "f(a)*f(r)", "Aproximación"]
+            print(tabulate(datos, headers=headers, floatfmt=".6f"))
+            graficar_funcion(funcion, a, b, raiz)
+
+    elif args.opcion == '2':
+        print("\nMétodo de Regula Falsi:")
+        funcion = args.funcion
+        a = args.a
+        b = args.b
+        raiz, datos = regula_falsi(funcion, a, b)
+        if raiz is not None:
+            print("\nTabla de iteraciones:")
+            headers = ["Iteración", "a", "b", "xr", "f(a)", "f(b)", "f(xr)", "f(a)*f(xr)"]
+            print(tabulate(datos, headers=headers, floatfmt=".6f"))
+            graficar_funcion(funcion, a, b, raiz)
+
+    elif args.opcion == '3':
+        print("\nMétodo de Newton-Raphson:")
+        funcion = args.funcion
+        x0 = args.x0
+        raiz, datos = newton_raphson(funcion, x0)
+        if raiz is not None:
+            print("\nTabla de iteraciones:")
+            headers = ["Iteración", "xn", "f(xn)", "f'(xn)", "f(xn)/f'(xn)"]
+            print(tabulate(datos, headers=headers, floatfmt=".6f"))
+            a = x0 - 1 if x0 > 1 else 0
+            b = x0 + 1 if x0 < 0 else x0 + 1
+            graficar_funcion(funcion, a, b, raiz)
+
+    elif args.opcion == '4':
+        print("\nMétodo de Secante:")
+        funcion = args.funcion
+        x0 = args.x0
+        x1 = args.x1
+        raiz, datos = secante(funcion, x0, x1)
+        if raiz is not None:
+            print("\nTabla de iteraciones:")
+            headers = ["x1", "x0", "f(x1)", "f(x0)", "x2", "Error Relativo"]
+            print(tabulate(datos, headers=headers, floatfmt=(".6f", ".6f", ".6f", ".6f", ".6f", ".6e")))
+            a = min(x0, x1)
+            b = max(x0, x1)
+            graficar_funcion(funcion, a, b, raiz)
+
+    elif args.opcion == '5':
+        print("Saliendo del programa...")
+
+    else:
+        print("Opción no válida. Por favor, seleccione una opción del 1 al 5.")
 
 if __name__ == "__main__":
-    menu_principal()
+    parser = argparse.ArgumentParser(description="Programa para encontrar raíces de funciones utilizando varios métodos.")
+    parser.add_argument('--opcion', type=str, required=True, help='Método de resolución (1-5)')
+    parser.add_argument('--funcion', type=str, required=False, help='Función matemática a resolver')
+    parser.add_argument('--a', type=float, required=False, help='Extremo inferior del intervalo (para métodos de Bisección y Regula Falsi)')
+    parser.add_argument('--b', type=float, required=False, help='Extremo superior del intervalo (para métodos de Bisección y Regula Falsi)')
+    parser.add_argument('--x0', type=float, required=False, help='Valor inicial x0 (para métodos de Newton-Raphson y Secante)')
+    parser.add_argument('--x1', type=float, required=False, help='Valor inicial x1 (para método de Secante)')
+    args = parser.parse_args()
+    menu_principal(args)
