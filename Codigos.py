@@ -183,7 +183,7 @@ def menu_principal(args):
     else:
         print("Opción no válida. Por favor, seleccione una opción del 1 al 5.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(description="Programa para encontrar raíces de funciones utilizando varios métodos.")
     parser.add_argument('--opcion', type=str, required=True, help='Método de resolución (1-5)')
     parser.add_argument('--funcion', type=str, required=False, help='Función matemática a resolver')
